@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QuantumLeap Analytics – AI-Driven Business Intelligence</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ========== CSS VARIABLES ========== */
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --text: #111827;
+      --muted: #6b7280;
+      --bg: #ffffff;
+      --bg-soft: #f3f4f6;
+      --radius: 8px;
+      --max-width: 1200px;
+      --transition: .25s ease-in-out;
+    }
+
+    /* ========== RESET ========== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      min-width: 320px;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    button, input, textarea {
+      font: inherit;
+    }
+
+    /* ========== UTILITIES ========== */
+    .container {
+      width: 90%;
+      max-width: var(--max-width);
+      margin-inline: auto;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: .9rem 1.8rem;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      min-height: 44px;
+      font-weight: 600;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+    .section {
+      padding: 4rem 0;
+    }
+    .section-title {
+      font-size: 1.75rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    /* ========== HEADER / NAV ========== */
+    header {
+      background: var(--bg);
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo img {
+      height: 40px; /* adjust as needed */
+      width: auto;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      background: var(--bg-soft);
+      padding: 4rem 0 3rem;
+    }
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .hero-text h1 {
+      font-size: 2.25rem;
+      margin-bottom: .75rem;
+    }
+    .hero-text p {
+      font-size: 1.125rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .hero-image img {
+      border-radius: var(--radius);
+      width: 100%;
+      height: auto;
+    }
+
+    /* ========== SERVICES ========== */
+    .services-grid {
+      display: grid;
+      gap: 2rem;
+    }
+    .service-card {
+      background: var(--bg-soft);
+      padding: 2rem;
+      border-radius: var(--radius);
+      text-align: center;
+      transition: var(--transition);
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, .06);
+    }
+    .service-card i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .service-card h3 {
+      margin-bottom: .75rem;
+      font-size: 1.25rem;
+    }
+
+    /* ========== CASES ========== */
+    .cases-grid {
+      display: grid;
+      gap: 2rem;
+    }
+    .case-card {
+      border: 1px solid #e5e7eb;
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .case-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .case-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .case-body h3 {
+      margin-bottom: .5rem;
+      font-size: 1.25rem;
+    }
+    .case-body p {
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+    .case-metrics {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: auto;
+    }
+    .metric {
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .metric span {
+      display: block;
+      font-size: .875rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    /* ========== CONTACT ========== */
+    .contact {
+      background: var(--bg-soft);
+    }
+    .contact-form {
+      max-width: 700px;
+      margin-inline: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: .9rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: var(--radius);
+    }
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--text);
+      color: #fff;
+      padding: 2.5rem 0;
+      text-align: center;
+    }
+    footer .socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    footer .socials a {
+      font-size: 1.25rem;
+      transition: var(--transition);
+    }
+    footer .socials a:hover {
+      color: var(--primary);
+    }
+
+    /* ========== MEDIA QUERIES ========== */
+    @media (min-width: 768px) {
+      .hero-inner {
+        flex-direction: row;
+        align-items: center;
+      }
+      .hero-text, .hero-image {
+        flex: 1;
+      }
+      .hero-text h1 {
+        font-size: 2.75rem;
+      }
+      .services-grid, .cases-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1024px) {
+      .services-grid, .cases-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .cases-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header>
+    <div class="container nav">
+      <a href="index.html" class="logo">
+        <!-- Placeholder SVG logo; swap src for your actual logo.svg file -->
+        <img src="logo.svg" alt="QuantumLeap Analytics Logo">
+      </a>
+      <!-- Optional: add nav links here later -->
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <h1>Unlock Data-Driven Growth with QuantumLeap Analytics</h1>
+        <p>Empower your enterprise with AI-powered business intelligence that turns raw data into actionable insights—faster than ever before.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary">Request a Demo</button>
+          <button class="btn btn-outline">Watch Video</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://placehold.co/600x400/2563eb/ffffff?text=AI+Analytics" alt="QuantumLeap Analytics Platform">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Our Enterprise Solutions</h2>
+      <div class="services-grid">
+        <article class="service-card">
+          <i class="fa-solid fa-chart-line"></i>
+          <h3>Predictive Analytics</h3>
+          <p>Forecast market trends and customer behavior with machine-learning models tailored to your industry.</p>
+        </article>
+        <article class="service-card">
+          <i class="fa-solid fa-shield-halved"></i>
+          <h3>Data Governance</h3>
+          <p>Ensure compliance and security with enterprise-grade data governance and access controls.</p>
+        </article>
+        <article class="service-card">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <h3>Cloud Integration</h3>
+          <p>Seamlessly connect your existing cloud stack for real-time data synchronization and insights.</p>
+        </article>
+        <article class="service-card">
+          <i class="fa-solid fa-users-gear"></i>
+          <h3>Professional Services</h3>
+          <p>Benefit from our industry experts who guide strategy, implementation, and optimization.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CLIENT CASES ========== -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Proven Results</h2>
+      <div class="cases-grid">
+        <article class="case-card">
+          <img src="https://placehold.co/400x200/10b981/ffffff?text=Retail+Giant" alt="Retail Case">
+          <div class="case-body">
+            <h3>Retail Giant Boosts Margins</h3>
+            <p>QuantumLeap optimized pricing strategies across 2,000+ SKUs, driving profitability while maintaining competitiveness.</p>
+            <div class="case-metrics">
+              <div class="metric">+18% <span>Margin</span></div>
+              <div class="metric">‑12% <span>Stock-outs</span></div>
+            </div>
+          </div>
+        </article>
+        <article class="case-card">
+          <img src="https://placehold.co/400x200/f59e0b/ffffff?text=Logistics+Co" alt="Logistics Case">
+          <div class="case-body">
+            <h3>Logistics Co Cuts Fuel Costs</h3>
+            <p>Real-time route optimization and predictive maintenance saved millions in operational expenses.</p>
+            <div class="case-metrics">
+              <div class="metric">‑22% <span>Fuel Cost</span></div>
+              <div class="metric">+15% <span>OTIF</span></div>
+            </div>
+          </div>
+        </article>
+        <article class="case-card">
+          <img src="https://placehold.co/400x200/8b5cf6/ffffff?text=SaaS+Platform" alt="SaaS Case">
+          <div class="case-body">
+            <h3>SaaS Platform Upsells 3×</h3>
+            <p>Customer health scoring and churn prediction enabled targeted upsell campaigns and proactive retention.</p>
+            <div class="case-metrics">
+              <div class="metric">3× <span>Upsell</span></div>
+              <div class="metric">‑30% <span>Churn</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="section contact">
+    <div class="container">
+      <h2 class="section-title">Get in Touch</h2>
+      <form class="contact-form" action="https://formspree.io/f/mrbykyyg" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Work Email" required>
+        <input type="text" name="company" placeholder="Company" required>
+        <textarea name="message" placeholder="Tell us about your project…" required></textarea>
+        <button class="btn btn-primary" type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="container">
+      <div class="socials">
+        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+      <p>© 2025 QuantumLeap Analytics. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
